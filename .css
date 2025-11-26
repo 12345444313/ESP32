@@ -1,0 +1,17 @@
+body {
+background: #202020;
+color: white;
+text-align: center;
+font-family: Arial;
+}
+button {
+width: 120px;
+height: 50px;
+border: none;
+margin: 10px;
+font-size: 20px;
+border-radius: 12px;
+background: #0099ff;
+color: white;
+}
+button:active { background: #0066cc; }
