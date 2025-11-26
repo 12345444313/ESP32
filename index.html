@@ -9,8 +9,8 @@ button { width: 100px; height: 60px; margin: 10px; font-size: 20px; border-radiu
 </style>
 </head>
 <body>
-<h2>ESP32 WiFi Car Control</h2>
 
+<h2>ESP32 WiFi Car Control</h2>
 
 <button onclick="send('F')">Forward</button><br>
 <button onclick="send('L')">Left</button>
@@ -18,9 +18,42 @@ button { width: 100px; height: 60px; margin: 10px; font-size: 20px; border-radiu
 <button onclick="send('R')">Right</button><br>
 <button onclick="send('B')">Backward</button>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
 <script>
-function send(cmd){ fetch(`https://your-firebase-url.firebaseio.com/cmd.json`, { method:'PUT', body:`"${cmd}"`}); }
+// ---------------------
+// Your Firebase Config ADDED ✔
+// ---------------------
+const firebaseConfig = {
+  apiKey: "AIzaSyDNdmBV9IkHg7t_GdAB2QNuzbzNfndlqNo",
+  authDomain: "esp-32-car-65618.firebaseapp.com",
+  databaseURL: "https://esp-32-car-65618-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "esp-32-car-65618",
+  storageBucket: "esp-32-car-65618.firebasestorage.app",
+  messagingSenderId: "75218390846",
+  appId: "1:75218390846:web:ade1288b621c9a9e3ae66f",
+  measurementId: "G-0LG6Q449R5"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+// ---------------------
+// Anonymous Authentication ✔
+// ---------------------
+firebase.auth().signInAnonymously().catch((error) => {
+  console.error("Auth error:", error);
+});
+
+// ---------------------
+// Send Command to DB ✔
+// ---------------------
+function send(cmd) {
+  firebase.database().ref("cmd").set(cmd);
+}
 </script>
+
 </body>
 </html>
