@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ESP32 Car Control</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: Arial; background: #111; color: white; text-align: center; }
+button { width: 100px; height: 60px; margin: 10px; font-size: 20px; border-radius: 10px; }
+</style>
+</head>
+<body>
+<h2>ESP32 WiFi Car Control</h2>
+
+
+<button onclick="send('F')">Forward</button><br>
+<button onclick="send('L')">Left</button>
+<button onclick="send('S')">Stop</button>
+<button onclick="send('R')">Right</button><br>
+<button onclick="send('B')">Backward</button>
+
+
+<script>
+function send(cmd){ fetch(`https://your-firebase-url.firebaseio.com/cmd.json`, { method:'PUT', body:`"${cmd}"`}); }
+</script>
+</body>
+</html>
